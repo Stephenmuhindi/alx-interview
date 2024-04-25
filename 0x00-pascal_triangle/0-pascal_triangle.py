@@ -1,15 +1,16 @@
 #!/usr/bin/python3
-"""Pascal's half square"""
+"""
+0-main
+"""
 
 
 def pascal_triangle(n):
     """
-    create pascal's triangle
-
-    :parameter: number of rows to make
-    :n: int
-    :return: Pascal's triangle.
-    :type: integet
+    A method that prints a list
+    of integers that rep. the
+    triangle of nnumber n:
+       - prints the empty list if the num is 0
+       - n ia assumed to be be an intx
     """
     pascal_tri = []
 
@@ -17,22 +18,14 @@ def pascal_triangle(n):
         return []
 
     for i in range(n):
-        if i == 0:
-            pascal_tri.append([1])
-        else:
-            cur_row = []
-            for j in range(i + 1):
-                if j == 0 or j == i:
-                    cur_row.append(1)
-                else:
-                    cur_row.append(pascal_tri[i - 1][j - 1]
-                                   + pascal_tri[i - 1][j])
+        cur_row = []
+        for j in range(i + 1):
+            if j == 0 or j == i:
+                cur_row.append(1)
+            else:
+                value = pascal_tri[i - 1][j - 1] + pascal_tri[i - 1][j]
+                cur_row.append(value)
 
-                    pascal_tri.append(cur_row)
+        pascal_tri.append(cur_row)
 
     return pascal_tri
-
-
-def print_pascal_triangle(triangle):
-    for row in triangle:
-        print(' '.join(map(str, row)))
