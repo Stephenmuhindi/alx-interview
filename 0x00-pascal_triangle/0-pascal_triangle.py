@@ -24,7 +24,3 @@ def pascal_triangle(n):
         pascal_tri.append(cur_row)
 
     return pascal_tri
-
-def print_pascal_triangle(triangle):
-    for row in triangle:
-        print(' '.join(map(str, row)))
