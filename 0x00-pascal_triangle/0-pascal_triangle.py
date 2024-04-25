@@ -6,10 +6,10 @@ def pascal_triangle(n):
     """
     create pascal's triangle
 
-    parameter: number of rows to make
-    n: int
-    return: Pascal's triangle.
-    type: integet
+    :parameter: number of rows to make
+    :n: int
+    :return: Pascal's triangle.
+    :type: integet
     """
     pascal_tri = []
 
@@ -26,7 +26,7 @@ def pascal_triangle(n):
                     cur_row.append(1)
                 else:
                     cur_row.append(pascal_tri[i - 1][j - 1]
-                            + pascal_tri[i - 1][j])
+                                   + pascal_tri[i - 1][j])
 
                     pascal_tri.append(cur_row)
 
