@@ -1,46 +1,48 @@
 #!/usr/bin/python3
-'''
-http status code
-'''
-from sys import stdin
+"""
+computes metrics
+"""
 
 
-def print_summary(total_file_size, status_counts):
+def parseLogs():
     """
     Reads logs from standard input and generates reports
-    :param total_file_size: handles this .
-    :param status_counts: Dictionary counts.
     """
-    print("File size: {:d}".format(total_file_size))
-    for code, count in sorted(status_counts.items()):
-        if count != 0:
-            print("{}: {}".format(code, count))
+    stdin = __import__('sys').stdin
+    lineNumber = 0
+    fileSize = 0
+    statusCodes = {}
+    codes = ('200', '301', '400', '401', '403', '404', '405', '500')
+    try:
+        for line in stdin:
+            lineNumber += 1
+            line = line.split()
+            try:
+                fileSize += int(line[-1])
+                if line[-2] in codes:
+                    try:
+                        statusCodes[line[-2]] += 1
+                    except KeyError:
+                        statusCodes[line[-2]] = 1
+            except (IndexError, ValueError):
+                pass
+            if lineNumber == 10:
+                report(fileSize, statusCodes)
+                lineNumber = 0
+        report(fileSize, statusCodes)
+    except KeyboardInterrupt as e:
+        report(fileSize, statusCodes)
+        raise
 
 
-http_status_counts = {'200': 0, '301': 0, '400': 0, '401': 0,
-                      '403': 0, '404': 0, '405': 0, '500': 0}
+def report(fileSize, statusCodes):
+    """
+    Prints generated report to standard output
+    """
+    print("File size: {}".format(fileSize))
+    for key, value in sorted(statusCodes.items()):
+        print("{}: {}".format(key, value))
 
-total_file_size = 0
-line_count = 0
 
-
-try:
-    for line in stdin:
-        line_args = line.split()
-
-        if len(line_args) > 2:
-            status_code = line_args[-2]
-            file_size = int(line_args[-1])
-            if status_code in http_status_counts:
-                http_status_counts[status_code] += 1
-            total_file_size += file_size
-            line_count += 1
-            if line_count == 10:
-                print_summary(total_file_size, http_status_counts)
-                line_count = 0
-
-except KeyboardInterrupt:
-    pass
-
-finally:
-    print_summary(total_file_size, http_status_counts)
+if __name__ == '__main__':
+    parseLogs()
