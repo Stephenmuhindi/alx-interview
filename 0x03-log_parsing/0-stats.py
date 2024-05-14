@@ -30,9 +30,9 @@ def parseLogs():
                 report(fileSize, statusCodes)
                 lineNumber = 0
         report(fileSize, statusCodes)
-    except KeyboardInterrupt as e:
-        report(fileSize, statusCodes)
-        raise
+    except KeyboardInterrupt:
+        print("Caught KeyboardInterrupt, stopping...")
+        report(fileSize, statusCodes)  # Generate final report
 
 
 def report(fileSize, statusCodes):
