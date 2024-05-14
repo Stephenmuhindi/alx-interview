@@ -1,11 +1,13 @@
 #!/usr/bin/python3
 """
-computes metrics
+computes metrics computes metricscomputes metrics omputes metrics
 """
 
 
 def parseLogs():
     """
+    Reads logs from standard input and generates reports
+    Reads logs from standard input and generates reports
     Reads logs from standard input and generates reports
     """
     stdin = __import__('sys').stdin
@@ -37,6 +39,8 @@ def parseLogs():
 
 def report(fileSize, statusCodes):
     """
+    Prints generated report to standard output
+    Prints generated report to standard output
     Prints generated report to standard output
     """
     print("File size: {}".format(fileSize))
