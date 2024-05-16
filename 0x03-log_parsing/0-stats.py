@@ -1,7 +1,20 @@
 #!/usr/bin/python3
+"""
+Provides a server class for paginating baby name data with deletion resilience.
 
+This script defines a `Server` class for managing and retrieving paginated baby
+names data loaded from a CSV file. It prioritizes resilience against potential
+deletions in the original data source.
+"""
 
 def parseLogs():
+    """
+    Provides a server class for paginating baby name data with deletion resilience.
+
+    This script defines a `Server` class for managing and retrieving paginated baby
+    names data loaded from a CSV file. It prioritizes resilience against potential
+    deletions in the original data source.
+    """
     stdin = __import__('sys').stdin
     lineNumber = 0
     fileSize = 0
@@ -30,6 +43,13 @@ def parseLogs():
 
 
 def report(fileSize, statusCodes):
+    """
+    Provides a server class for paginating baby name data with deletion resilience.
+
+    This script defines a `Server` class for managing and retrieving paginated baby
+    names data loaded from a CSV file. It prioritizes resilience against potential
+    deletions in the original data source.
+    """
     print("File size: {}".format(fileSize))
     for key, value in sorted(statusCodes.items()):
         print("{}: {}".format(key, value))
