@@ -4,26 +4,23 @@ status codes
 """
 from sys import stdin
 
-
 def print_summary(total_file_size, status_counts):
     """
-    display the amount of bytes in files and status count.
-
-    :parameter total_file_size: all added files to this point.
-    :parameter status_counts: status code counts
+    Display the amount of bytes in files and status count.
+    
+    :param total_file_size: all added files to this point.
+    :param status_counts: status code counts
     """
     print("File size: {:d}".format(total_file_size))
     for code, count in sorted(status_counts.items()):
         if count != 0:
             print("{}: {}".format(code, count))
 
-
 http_status_counts = {'200': 0, '301': 0, '400': 0, '401': 0,
                       '403': 0, '404': 0, '405': 0, '500': 0}
 
 total_file_size = 0
 line_count = 0
-
 
 try:
     for line in stdin:
@@ -48,3 +45,4 @@ except KeyboardInterrupt:
 
 finally:
     print_summary(total_file_size, http_status_counts)
+
