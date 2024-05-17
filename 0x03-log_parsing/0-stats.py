@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""mod documentation"""
 import sys
 import signal
 
@@ -18,6 +18,9 @@ line_count = 0
 
 
 def print_stats():
+    """
+    mod documentation mod documentation
+    """
     print("File size: {}".format(total_file_size))
     for code in sorted(status_code_counts.keys()):
         if status_code_counts[code] > 0:
@@ -25,11 +28,17 @@ def print_stats():
 
 
 def signal_handler(sig, frame):
+    """
+    mod documentation mod documentation
+    """
     print_stats()
     sys.exit(0)
 
 
 def main():
+    """
+    mod documentation mod documentation
+    """
     global total_file_size, line_count
     signal.signal(signal.SIGINT, signal_handler)
 
