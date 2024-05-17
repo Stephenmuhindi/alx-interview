@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-HTTP status codes
+status codes
 """
 from sys import stdin
 
@@ -9,8 +9,8 @@ def print_summary(total_file_size, status_counts):
     """
     display the amount of bytes in files and status count.
 
-    :param total_file_size: all added ip files to this piont.
-    :param status_counts: Dict of status code counts
+    :parameter total_file_size: all added files to this point.
+    :parameter status_counts: status code counts
     """
     print("File size: {:d}".format(total_file_size))
     for code, count in sorted(status_counts.items()):
