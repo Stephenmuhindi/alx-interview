@@ -1,13 +1,6 @@
 #!/usr/bin/python3
 """
-Checks if a byte sequence represents valid UTF-8 encoding (variable length).
-
-Iterates through bytes, validates starting bits for character length
-(1, 2, 3, or 4 bytes)
-and checks continuation bytes (must start with 10).
-Returns True if all bytes are valid and
-continuation count reaches zero at the end
-(complete character sequence), False otherwise.
+Checks if a byte sequence represents valid UTF-8.
 """
 
 
