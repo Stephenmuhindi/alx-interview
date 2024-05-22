@@ -1,13 +1,11 @@
 #!/usr/bin/python3
 """
-Checks if a byte sequence represents valid UTF-8.
+utf8-valid
 """
 
 
 def validUTF8(data):
-    """
-    Checks UTF-8 validity of data (list of 1-byte integers).
-    """
+    """utf-8 validation check"""
     expected_continuations = 0
     for byte in data:
         if expected_continuations == 0:
