@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 """
 module definition
 """
@@ -11,16 +11,32 @@ bound_1 = set()
 
 def boundary(grid, i, j):
     """
-    Find cell with either 4, 3, 2 or 1.
+    find cells with 4 factorial
     """
     boundaries = 0
-    if i == 0 or grid[i-1][j] == 0:
+    try:
+        if i == 0:
+            boundaries += 1
+        elif grid[i-1][j] == 0:
+            boundaries += 1
+    except IndexError:
         boundaries += 1
-    if i == len(grid) - 1 or grid[i+1][j] == 0:
+    try:
+        if grid[i+1][j] == 0:
+            boundaries += 1
+    except IndexError:
         boundaries += 1
-    if j == len(grid[0]) - 1 or grid[i][j+1] == 0:
+    try:
+        if grid[i][j+1] == 0:
+            boundaries += 1
+    except IndexError:
         boundaries += 1
-    if j == 0 or grid[i][j-1] == 0:
+    try:
+        if j == 0:
+            boundaries += 1
+        elif grid[i][j-1] == 0:
+            boundaries += 1
+    except IndexError:
         boundaries += 1
 
     if boundaries == 1:
@@ -35,17 +51,17 @@ def boundary(grid, i, j):
 
 def island_perimeter(grid):
     """
-    Calculate and return perimeter of island in the grid
+    Calculate and return perimeter of island
     """
-    if not grid:
+    if grid == []:
         return 0
-    rows = len(grid)
-    cols = len(grid[0])
-    for i in range(rows):
-        for j in range(cols):
+    row = len(grid)
+    coll = len(grid[0])
+    for i in range(row):
+        for j in range(coll):
             if grid[i][j] == 1:
                 boundary(grid, i, j)
-                if bound_4:
+                if len(bound_4) != 0:
                     return 4
     perimeter = (len(bound_3) * 3) + (len(bound_2) * 2) + (len(bound_1))
     return perimeter
