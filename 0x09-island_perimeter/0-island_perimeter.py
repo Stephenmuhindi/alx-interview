@@ -1,6 +1,7 @@
-#!/usr/bin/python3
+#!/usr/bin/python2
 """
-module documentation
+Define island_perimeter function that finds the perimeter
+of an island in a body of water
 """
 
 bound_4 = set()
@@ -10,36 +11,21 @@ bound_1 = set()
 
 
 def boundary(grid, i, j):
-    """
-    This function checks the surrounding cells
-    of a given cell (i, j) in the grid.
-    It counts the number of neighboring cells that are water (0).
-    Based on the count (boundaries).
+    """Find cells with either 4, 3, 2 or 1 exposed boundary and add them to
+       appropriate set
+       Args:
+           grid (list): 2d list
+           i (int): row number
+           j (int): column number
     """
     boundaries = 0
-    try:
-        if i == 0:
-            boundaries += 1
-        elif grid[i-1][j] == 0:
-            boundaries += 1
-    except:
+    if i == 0 or grid[i-1][j] == 0:
         boundaries += 1
-    try:
-        if grid[i+1][j] == 0:
-            boundaries += 1
-    except:
+    if i == len(grid) - 1 or grid[i+1][j] == 0:
         boundaries += 1
-    try:
-        if grid[i][j+1] == 0:
-            boundaries += 1
-    except:
+    if j == len(grid[0]) - 1 or grid[i][j+1] == 0:
         boundaries += 1
-    try:
-        if j == 0:
-            boundaries += 1
-        elif grid[i][j-1] == 0:
-            boundaries += 1
-    except:
+    if j == 0 or grid[i][j-1] == 0:
         boundaries += 1
 
     if boundaries == 1:
@@ -54,20 +40,24 @@ def boundary(grid, i, j):
 
 def island_perimeter(grid):
     """
-    It iterates through the grid 
-    calls boundary for each land cell (1).
-    If a cell with 4 exposed boundaries (bound_4) is found,
-    it immediately returns 4 (entirely surrounded cell has a perimeter of 4).
+    Calculate and return perimeter of island in the grid
+    Grid is a rectangular grid where 0s represent water and 1s represent land
+    Each cell is a square with a side length of 1
+    There is only one island
+    Args:
+        grid [list] : 2d list of ints either 0 or 1
+    Return:
+       perimeter of island
     """
-    if grid == []:
+    if not grid:
         return 0
-    l = len(grid)
-    w = len(grid[0])
-    for i in range(l):
-        for j in range(w):
+    rows = len(grid)
+    cols = len(grid[0])
+    for i in range(rows):
+        for j in range(cols):
             if grid[i][j] == 1:
                 boundary(grid, i, j)
-                if len(bound_4) != 0:
+                if bound_4:
                     return 4
     perimeter = (len(bound_3) * 3) + (len(bound_2) * 2) + (len(bound_1))
     return perimeter
