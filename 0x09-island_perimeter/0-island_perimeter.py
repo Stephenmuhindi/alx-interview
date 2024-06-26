@@ -1,7 +1,6 @@
 #!/usr/bin/python2
 """
-Define island_perimeter function that finds the perimeter
-of an island in a body of water
+module definition
 """
 
 bound_4 = set()
@@ -11,12 +10,8 @@ bound_1 = set()
 
 
 def boundary(grid, i, j):
-    """Find cells with either 4, 3, 2 or 1 exposed boundary and add them to
-       appropriate set
-       Args:
-           grid (list): 2d list
-           i (int): row number
-           j (int): column number
+    """
+    Find cell with either 4, 3, 2 or 1.
     """
     boundaries = 0
     if i == 0 or grid[i-1][j] == 0:
@@ -41,13 +36,6 @@ def boundary(grid, i, j):
 def island_perimeter(grid):
     """
     Calculate and return perimeter of island in the grid
-    Grid is a rectangular grid where 0s represent water and 1s represent land
-    Each cell is a square with a side length of 1
-    There is only one island
-    Args:
-        grid [list] : 2d list of ints either 0 or 1
-    Return:
-       perimeter of island
     """
     if not grid:
         return 0
