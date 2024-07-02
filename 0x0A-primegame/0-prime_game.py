@@ -1,38 +1,49 @@
-#!/usr/bin/python3
 """
-module description
+Module description
 """
 
 
 def primes(n):
     """
-    return prime numeral from 1 to the num
+    Finds all prime numbers from 2 to n (inclusive).
     """
     prime = []
     sieve = [True] * (n + 1)
-    for p in range(2, n + 1):
-        if (sieve[p]):
-            prime.append(p)
-            for i in range(p, n + 1, p):
+    sieve[0] = sieve[1] = False
+
+    for p in range(2, int(n**0.5) + 1):
+        if sieve[p]:
+            for i in range(p * p, n + 1, p):
                 sieve[i] = False
-    return prime
+    return [p for p, is_prime in enumerate(sieve) if is_prime]
 
 
-def isWinner(x, nums):
+def is_winner(x, nums):
     """
-    who is the winner of the game?
+    winner is
     """
-    if x is None or nums is None or x == 0 or nums == []:
+
+    if x is None or nums is None or not nums:
         return None
-    Maria = Ben = 0
-    for i in range(x):
-        prime = primes(nums[i])
-        if len(prime) % 2 == 0:
-            Ben += 1
+
+    maria_score = 0
+    ben_score = 0
+    for num in nums:
+        prime_count = 0
+        for factor in range(2, int(num**0.5) + 1):
+            if num % factor == 0:
+                prime_count += 1
+                num //= factor
+                while num % factor == 0:
+                    num //= factor
+        if prime_count % 2 == 0:
+            ben_score += 1
         else:
-            Maria += 1
-    if Maria > Ben:
-        return 'Maria'
-    elif Ben > Maria:
-        return 'Ben'
-    return None
+            maria_score += 1
+
+    if maria_score > ben_score:
+        return "Maria"
+    elif ben_score > maria_score:
+        return "Ben"
+    else:
+        return None
